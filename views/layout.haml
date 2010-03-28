@@ -1,0 +1,23 @@
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml", 'xml:lang' => 'en', :lang => 'en'}
+
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html;charset=utf-8'} 
+    %title
+      the lifestream of steven wilkin
+    %meta{:name => 'description', :content => ''}
+    - ['reset', 'lifestream'].each do |c|
+      %link{:type => 'text/css', :rel => 'stylesheet', :href => "/css/#{c}.css"}
+    - ['jquery-1.4.2.min', 'lifestream'].each do |j|
+      %script{:type => 'text/javascript', :src => "/js/#{j}.js"}
+
+  %body
+
+    #header
+
+    #content
+      = yield
+
+    #footer
+      &copy; 2010
+      %a{:href => 'http://stevenwilkin.com'} Steven Wilkin

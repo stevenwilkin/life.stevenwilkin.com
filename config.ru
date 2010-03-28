@@ -1,0 +1,2 @@
+require 'lifestream'
+run LifeStream
