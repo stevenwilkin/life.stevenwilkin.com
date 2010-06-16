@@ -9,7 +9,7 @@ require 'sqlite3'
 SQL = <<END_SQL
 	INSERT OR IGNORE INTO
 		blog
-		(guid, title, link, date)
+		(guid, title, url, date)
 	VALUES
 		(?, ?, ?, ?)
 END_SQL
@@ -25,10 +25,10 @@ doc.xpath('//item').each do |item|
 	title = item.at_css('title').content
 	date = item.at_css('pubDate').content
 	date = Time.utc(*ParseDate.parsedate(date)).to_i	# timestamp in milliseconds
-	link = item.at_css('link').content
+	url = item.at_css('link').content
 	guid = item.at_css('guid').content
 	puts "Adding: #{title}"
-	rows = db.execute(SQL, guid, title, link, date)
+	rows = db.execute(SQL, guid, title, url, date)
 end
 
 puts 'Done'

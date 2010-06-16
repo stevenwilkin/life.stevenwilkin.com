@@ -3,6 +3,6 @@ DROP TABLE IF EXISTS blog;
 CREATE TABLE blog (
 	guid TEXT PRIMARY KEY,
 	title TEXT,
-	link TEXT,
+	url TEXT,
 	date DATETIME
 );
