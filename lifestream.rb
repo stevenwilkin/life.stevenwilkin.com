@@ -4,7 +4,16 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'sass'
-require 'faker'
+require 'sqlite3'
+
+SQL = <<END_SQL
+	SELECT
+		*
+	FROM
+		blog
+	ORDER BY
+		date DESC
+END_SQL
 
 class LifeStream < Sinatra::Base
 
@@ -13,13 +22,10 @@ class LifeStream < Sinatra::Base
 	set :logging, true
 
 	get '/' do
-		@items = []
-		1.upto(10).each do
-			date = Time.utc(2010, 1 + rand(12), 1+ rand(28), rand(24), rand(50))
-			url = 'http://' + Faker::Internet.domain_name() + '/' + Faker::Lorem.words(rand(6)).join('/')
-			type = %w(blog lastfm delicious)[rand(3)]
-			@items << {:type => type, :date => date, :url => url}
-		end
+		db = SQLite3::Database.new(File.expand_path(File.join(
+			File.dirname(__FILE__), 'db', 'lifestream.db')))
+		db.results_as_hash = true
+		@items = db.execute(SQL)
 		haml :index
 	end
 
