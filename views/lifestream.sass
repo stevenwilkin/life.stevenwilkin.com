@@ -1,40 +1,71 @@
-!white = #FFF
-!dark_grey = #1E1E1E
-!grey = #AAA
-!light_grey = #EEE
-!blue = #33CCFF
-
 body
-  background-color = !dark_grey
   font-family: Helvetica Neue, Verdana, Arial, Helvetica, sans-serif
-  color = !white
+  color: rgba(0, 0, 0, 0.8)
+  background: url(/img/texture.png)
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6)
 
 a
-  color = !grey
+  color: rgba(255, 255, 255, 1)
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6)
   text-decoration: none
   
   &:hover
-    color = !light_grey
+    color: rgba(0, 0, 0, 0.8)
+    text-shadow: none
+
+#header
+
+  h1
+    float: left
+
+  ul
+    float: right
+
+    li, a
+      text-indent: -1000px
+      width: 32px
+      height: 32px
+      display: block
+      float: left
+
+      #blog
+        background: url(/img/blogger_32.png)
+      #lastfm
+        background: url(/img/lastfm_32.png)
+      #delicious
+        background: url(/img/delicious_32.png)
+
+#wrapper
+  width: 600px
+  height: 400px
+  position: absolute
+  top: 30px
+  left: 50%
+  margin-left: -300px
+  font-size: 30px
 
 #content
-  width: 600px
-  height: 75px
-  position: absolute
-  top: 50%
-  left: 50%
-  margin-top: -38px
-  margin-left: -300px
-  text-align: center
-  font-size: 30px
-  color = !blue
+  float: left
+  margin: 20px 0 0
+  font-size: 15px
+
+  li
+    height: 18px
+    padding: 4px 0 2px 24px
+    
+    &.blog
+      background: url(/img/blogger_16.png) 0 2px no-repeat
+    &.lastfm
+      background: url(/img/lastfm_16.png) 0 2px no-repeat
+    &.delicious
+      background: url(/img/delicious_16.png) 0 2px no-repeat
+
+    span
+      float: left
+      width: 55px
 
 #footer
-  width: 728px
-  position: absolute
-  bottom: 0
-  left: 50%
-  margin-left: -364px
-  text-align: center
+  float: left
+  clear: left
   font-size: 13px
-  font-color = !light_grey
-  padding: 0 0 5px 0
+  margin: 20px 0

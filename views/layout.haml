@@ -13,11 +13,21 @@
 
   %body
 
-    #header
+    #wrapper
 
-    #content
-      = yield
-
-    #footer
-      &copy; 2010
-      %a{:href => 'http://stevenwilkin.com'} Steven Wilkin
+      #header
+        %h1 the lifestream of steven wilkin
+        %ul
+          %li
+            %a{:href => 'http://sickbiscuit.com/blog', :id => 'blog'} Blog
+          %li
+            %a{:href => 'http://lastfm.com', :id => 'lastfm'} LastFM
+          %li
+            %a{:href => 'http://delicious.com', :id => 'delicious'} Delicious
+  
+      #content
+        = yield
+  
+      #footer
+        &copy; 2010
+        %a{:href => 'http://stevenwilkin.com'} Steven Wilkin

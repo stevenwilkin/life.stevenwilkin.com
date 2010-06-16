@@ -1,1 +1,5 @@
-life stream
+%ul
+  - @items.each do |i|
+    %li{:class => i[:type]}
+      %span= i[:date].strftime('%d %b')
+      %a{:href => i[:url]}= i[:url]
