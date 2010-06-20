@@ -8,9 +8,14 @@ require 'sqlite3'
 
 SQL = <<END_SQL
 	SELECT
-		*
+		*, 'blog' AS type
 	FROM
 		blog
+	UNION
+	SELECT
+		*, 'lastfm' AS type
+	FROM
+		lastfm
 	ORDER BY
 		date DESC
 END_SQL

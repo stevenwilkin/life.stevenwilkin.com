@@ -1,5 +1,5 @@
 %ul
   - @items.each do |i|
-    %li{:class => 'blog'}
+    %li{:class => i['type']}
       %span= Time.at(i['date'].to_i).strftime('%d %b')
       %a{:href => i['url']}= i['title']
