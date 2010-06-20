@@ -16,6 +16,11 @@ SQL = <<END_SQL
 		*, 'lastfm' AS type
 	FROM
 		lastfm
+	UNION
+	SELECT
+		*, 'delicious' AS type
+	FROM
+		delicious
 	ORDER BY
 		date DESC
 END_SQL
