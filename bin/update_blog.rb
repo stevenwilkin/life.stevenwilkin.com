@@ -1,34 +1,12 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'open-uri'
-require 'nokogiri'
-require 'parsedate'
-require 'sqlite3'
+require File.expand_path(File.join(
+	File.dirname(__FILE__), '..', 'lib', 'rss_to_sqlite'))
 
-SQL = <<END_SQL
-	INSERT OR IGNORE INTO
-		blog
-		(guid, title, url, date)
-	VALUES
-		(?, ?, ?, ?)
-END_SQL
-
-db = SQLite3::Database.new(File.expand_path(File.join(File.dirname(__FILE__), '..', 'db', 'lifestream.db')))
-
-puts 'Fetching feed'
-
-FEED = 'http://sickbiscuit.com/blog/feed/'
-doc = Nokogiri::XML(open(FEED))
-
-doc.xpath('//item').each do |item|
-	title = item.at_css('title').content
-	date = item.at_css('pubDate').content
-	date = Time.utc(*ParseDate.parsedate(date)).to_i	# timestamp in milliseconds
-	url = item.at_css('link').content
-	guid = item.at_css('guid').content
-	puts "Adding: #{title}"
-	rows = db.execute(SQL, guid, title, url, date)
+class Blog < RssToSQLite
+	@@feed = 'http://sickbiscuit.com/blog/feed/'
+	@@table = 'blog'
 end
 
-puts 'Done'
+Blog.init
+Blog.process
