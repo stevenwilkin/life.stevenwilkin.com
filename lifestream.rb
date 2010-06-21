@@ -25,6 +25,17 @@ SQL = <<END_SQL
 		date DESC
 END_SQL
 
+ITEMS_PER_PAGE = 20
+
+SQL_NUM_PAGES =<<END_SQL
+	SELECT COUNT(*) FROM
+	(
+		SELECT * FROM blog UNION
+		SELECT * FROM delicious UNION
+		SELECT * FROM lastfm
+	)
+END_SQL
+
 class LifeStream < Sinatra::Base
 
 	set :static, true
@@ -35,6 +46,8 @@ class LifeStream < Sinatra::Base
 		db = SQLite3::Database.new(File.expand_path(File.join(
 			File.dirname(__FILE__), 'db', 'lifestream.db')))
 		db.results_as_hash = true
+		total_items = db.execute(SQL_NUM_PAGES)[0][0]
+		@pages = (total_items.to_f / ITEMS_PER_PAGE).ceil
 		@items = db.execute(SQL)
 		haml :index
 	end
