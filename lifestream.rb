@@ -23,6 +23,7 @@ SQL = <<END_SQL
 		delicious
 	ORDER BY
 		date DESC
+	LIMIT ? OFFSET ?
 END_SQL
 
 ITEMS_PER_PAGE = 20
@@ -42,13 +43,15 @@ class LifeStream < Sinatra::Base
 	set :public, File.join(File.dirname(__FILE__), 'public')
 	set :logging, true
 
-	get '/' do
+	get '/:page?' do
 		db = SQLite3::Database.new(File.expand_path(File.join(
 			File.dirname(__FILE__), 'db', 'lifestream.db')))
 		db.results_as_hash = true
 		total_items = db.execute(SQL_NUM_PAGES)[0][0]
 		@pages = (total_items.to_f / ITEMS_PER_PAGE).ceil
-		@items = db.execute(SQL)
+		page = params[:page].to_i
+		page = 1 if page == 0
+		@items = db.execute(SQL, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE)
 		haml :index
 	end
 
