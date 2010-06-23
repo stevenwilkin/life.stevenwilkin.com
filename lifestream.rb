@@ -49,9 +49,9 @@ class LifeStream < Sinatra::Base
 		db.results_as_hash = true
 		total_items = db.execute(SQL_NUM_PAGES)[0][0]
 		@pages = (total_items.to_f / ITEMS_PER_PAGE).ceil
-		page = params[:page].to_i
-		page = 1 if page == 0
-		@items = db.execute(SQL, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE)
+		@page = params[:page].to_i
+		@page = 1 if @page == 0
+		@items = db.execute(SQL, ITEMS_PER_PAGE, (@page - 1) * ITEMS_PER_PAGE)
 		haml :index
 	end
 
