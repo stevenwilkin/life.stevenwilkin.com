@@ -3,3 +3,9 @@
     %li{:class => i['type']}
       %span= Time.at(i['date'].to_i).strftime('%d %b')
       %a{:href => i['url']}= i['title']
+
+#pagination
+  - if @page > 1
+    %a{:href => "/#{@page - 1}", :title => 'Previous page'} &laquo; prev
+  - if @page < @pages
+    %a{:href => "/#{@page + 1}", :title => 'Next page'}next &raquo;
