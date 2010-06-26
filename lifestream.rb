@@ -54,7 +54,7 @@ class LifeStream < Sinatra::Base
 		@page = 1 if @page == 0
 		# redirect request for pages outside of bounds
 		redirect '/' if @page < 0
-		redirect "/#{@pages}" if @page > @pages
+		redirect "/#{@pages}" if @page > @pages && @pages > 0
 		@items = db.execute(SQL, ITEMS_PER_PAGE, (@page - 1) * ITEMS_PER_PAGE)
 		haml :index
 	end
