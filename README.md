@@ -12,7 +12,7 @@ sqlite database which in turn is updated via ruby scripts launched by cron jobs
 
 ## install dependencies
 
-gem install sinatra haml sqlite3
+	gem install sinatra haml sqlite3
 
 
 ## clone repo
