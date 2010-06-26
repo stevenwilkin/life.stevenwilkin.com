@@ -43,3 +43,6 @@ the following cron entries will kick off the database update scripts at 00:20,
 	rackup ./config.ru
 
 browse to [http://0.0.0.0:9292](http://0.0.0.0:9292)
+
+
+2010 Steven Wilkin | [@stevebiscuit](http://twitter.com/stevebiscuit) | [stevenwilkin.com](http://stevenwilkin.com)
