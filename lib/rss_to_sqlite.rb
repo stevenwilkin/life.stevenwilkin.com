@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'open-uri'
 require 'nokogiri'
-require 'parsedate'
+require 'date'
 require 'sqlite3'
 
 class RssToSQLite
@@ -34,7 +34,7 @@ class RssToSQLite
 		@@doc.xpath('//item').each do |item|
 			title = item.at_css('title').content
 			date = item.at_css('pubDate').content
-			date = Time.utc(*ParseDate.parsedate(date)).to_i	# timestamp in milliseconds
+			date = Date.parse(date).to_time.utc.to_i	# timestamp in milliseconds
 			url = item.at_css('link').content
 			guid = item.at_css('guid').content
 			puts "Adding: #{title}"
