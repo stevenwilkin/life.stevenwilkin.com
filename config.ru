@@ -1,2 +1,4 @@
+$: << '.'
+
 require 'lifestream'
 run LifeStream
