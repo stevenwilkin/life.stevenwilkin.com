@@ -39,7 +39,6 @@ END_SQL
 class LifeStream < Sinatra::Base
 
 	set :static, true
-	set :public, File.join(File.dirname(__FILE__), 'public')
 	set :logging, true
 
 	get '/:page?' do
